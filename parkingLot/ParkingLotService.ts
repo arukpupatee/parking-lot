@@ -1,5 +1,11 @@
+import { ParkingLot } from './models/ParkingLot'
+
 export class ParkingLotService {
+  parkingLot: ParkingLot
+
   createParkingLot(totalSlot: number) {
+    this.parkingLot = new ParkingLot(totalSlot)
+
     console.log(`Created a parking lot with ${totalSlot} slots`)
   }
 
