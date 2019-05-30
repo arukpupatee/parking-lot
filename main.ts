@@ -59,7 +59,7 @@ function main() {
         const [registrationNumber] = params
 
         parkingLotService.displaySlotNumberByRegistrationNumber(
-          +registrationNumber
+          registrationNumber
         )
 
         break

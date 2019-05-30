@@ -73,8 +73,20 @@ export class ParkingLotService {
     console.log(slotNumbers.join(', '))
   }
 
-  displaySlotNumberByRegistrationNumber(registrationNumber: number) {
-    console.log('6')
+  displaySlotNumberByRegistrationNumber(registrationNumber: string) {
+    try {
+      const tickets = this.ticketManager.tickets
+      const expectedTicket = tickets.find(
+        ticket =>
+          ticket.carInformation.registrationNumber === registrationNumber
+      )
+
+      if (!expectedTicket) throw new Error('Not found')
+
+      console.log(expectedTicket.slotNumber)
+    } catch (error) {
+      console.log('Not found')
+    }
   }
 
   private displayStatusHeader() {
