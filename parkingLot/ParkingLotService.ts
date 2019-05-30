@@ -1,6 +1,7 @@
 import { ParkingLot } from './models/ParkingLot'
 import { Car } from './models/Car'
 import { TicketManager } from './models/TicketManager'
+import { Ticket } from './models/Ticket'
 
 export class ParkingLotService {
   parkingLot: ParkingLot
@@ -48,12 +49,10 @@ export class ParkingLotService {
   }
 
   displayStatus() {
-    console.log(`Slot No. Registration No Colour
-    1 KA-01-HH-1234 White
-    2 KA-01-HH-9999 White
-    3 KA-01-BB-0001 Black
-    5 KA-01-HH-2701 Blue
-    6 KA-01-HH-3141 Black`)
+    const tickets = this.ticketManager.tickets
+
+    this.displayStatusHeader()
+    this.displayStatusBody(tickets)
   }
 
   displayRegistrationNumbersByColour(colour: string) {
@@ -66,5 +65,19 @@ export class ParkingLotService {
 
   displaySlotNumberByRegistrationNumber(registrationNumber: number) {
     console.log('6')
+  }
+
+  private displayStatusHeader() {
+    console.log('Slot No. Registration No Colour')
+  }
+
+  private displayStatusBody(tickets: Ticket[]) {
+    tickets.forEach(ticket => {
+      const slotNumber = ticket.slotNumber
+      const registrationNumber = ticket.carInformation.registrationNumber
+      const colour = ticket.carInformation.colour
+
+      console.log(`${slotNumber} ${registrationNumber} ${colour}`)
+    })
   }
 }
