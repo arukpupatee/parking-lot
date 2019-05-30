@@ -1,0 +1,16 @@
+{
+  "name": "parking-lot",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "scripts": {
+    "dev": "ts-node main.ts",
+    "start": "ts-node main.ts"
+  },
+  "repository": "https://github.com/arukpupatee/parking-lot.git",
+  "author": "arukpupatee <aruk.pupatee@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "ts-node": "^8.2.0",
+    "typescript": "^3.5.1"
+  }
+}
