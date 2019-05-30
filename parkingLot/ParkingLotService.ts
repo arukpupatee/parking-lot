@@ -33,7 +33,18 @@ export class ParkingLotService {
   }
 
   leave(slotNumber: number) {
-    console.log('Slot number 4 is free')
+    const parkedSlot = this.parkingLot.getParkedSlotByNumber(slotNumber)
+    const parkedCar = this.parkingLot.getParkedCarInSlot(parkedSlot)
+
+    const car = parkedCar.leave(parkedSlot)
+
+    this.parkingLot.freeSlot(parkedSlot)
+
+    const ticket = car.returnTicket()
+
+    this.ticketManager.receiveTicket(ticket)
+
+    console.log(`Slot number ${parkedSlot} is free`)
   }
 
   displayStatus() {

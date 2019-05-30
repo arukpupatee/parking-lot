@@ -29,12 +29,33 @@ export class ParkingLot {
     return slot
   }
 
+  getParkedSlotByNumber(slotNumber: number): ParkedSlot {
+    const slot = this.slots.find(slot => slot.number === slotNumber)
+
+    if (!slot) throw new Error('Slot not found')
+    if (!(slot instanceof ParkedSlot)) throw new Error('Parked slot not found')
+
+    return slot
+  }
+
+  getParkedCarInSlot(parkedSlot: ParkedSlot): ParkedCar {
+    return parkedSlot.car
+  }
+
   allocateSlot(availableSlot: AvailableSlot): AllocatedSlot {
     const allocatedSlot = new AllocatedSlot(availableSlot.number)
 
     this.updateSlot(allocatedSlot)
 
     return allocatedSlot
+  }
+
+  freeSlot(parkedSlot: ParkedSlot): AvailableSlot {
+    const availableSlot = new AvailableSlot(parkedSlot.number)
+
+    this.updateSlot(availableSlot)
+
+    return availableSlot
   }
 
   updateParkedCar(allocatedSlot: AllocatedSlot, car: ParkedCar) {

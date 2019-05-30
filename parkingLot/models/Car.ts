@@ -17,4 +17,10 @@ export class Car implements CarInformation {
 
     return new ParkedCar(this.registrationNumber, this.colour, this.ticket)
   }
+
+  returnTicket(): Ticket {
+    if (!this.ticket) throw new Error('Ticket is missing')
+
+    return this.ticket
+  }
 }

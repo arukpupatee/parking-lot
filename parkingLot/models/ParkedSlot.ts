@@ -2,5 +2,5 @@ import { Slot } from './Slot'
 import { ParkedCar } from './ParkedCar'
 
 export class ParkedSlot implements Slot {
-  constructor(public number: number, car: ParkedCar) {}
+  constructor(public number: number, public car: ParkedCar) {}
 }
