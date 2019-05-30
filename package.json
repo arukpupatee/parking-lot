@@ -10,7 +10,11 @@
   "author": "arukpupatee <aruk.pupatee@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "readline-sync": "^1.4.9",
     "ts-node": "^8.2.0",
     "typescript": "^3.5.1"
+  },
+  "devDependencies": {
+    "@types/readline-sync": "^1.4.3"
   }
 }
