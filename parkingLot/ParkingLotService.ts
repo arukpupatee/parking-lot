@@ -56,7 +56,12 @@ export class ParkingLotService {
   }
 
   displayRegistrationNumbersByColour(colour: string) {
-    console.log('KA-01-HH-1234, KA-01-HH-9999, KA-01-P-333')
+    const tickets = this.ticketManager.tickets
+    const registrationNumbers = tickets
+      .filter(ticket => ticket.carInformation.colour === colour)
+      .map(ticket => ticket.carInformation.registrationNumber)
+
+    console.log(registrationNumbers.join(', '))
   }
 
   displaySlotNumbersByColour(colour: string) {
