@@ -65,7 +65,12 @@ export class ParkingLotService {
   }
 
   displaySlotNumbersByColour(colour: string) {
-    console.log('1, 2, 4')
+    const tickets = this.ticketManager.tickets
+    const slotNumbers = tickets
+      .filter(ticket => ticket.carInformation.colour === colour)
+      .map(ticket => ticket.slotNumber)
+
+    console.log(slotNumbers.join(', '))
   }
 
   displaySlotNumberByRegistrationNumber(registrationNumber: number) {
