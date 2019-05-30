@@ -1,31 +1,67 @@
 import { prompt } from 'readline-sync'
+import { ParkingLotService } from './ParkingLotService'
 
 function main() {
+  const parkingLotService = new ParkingLotService()
   const input = prompt()
   const [command, ...params] = input.split(' ')
 
   switch (command) {
-    case CommandEnum.CREATE_PARKING_LOT:
-      console.log('create')
+    case CommandEnum.CREATE_PARKING_LOT: {
+      const [totalSlot] = params
+
+      parkingLotService.createParkingLot(+totalSlot)
+
       break
-    case CommandEnum.PARK:
-      console.log('park')
+    }
+
+    case CommandEnum.PARK: {
+      const [registrationNumber, colour] = params
+
+      parkingLotService.park(registrationNumber, colour)
+
       break
-    case CommandEnum.LEAVE:
-      console.log('leave')
+    }
+
+    case CommandEnum.LEAVE: {
+      const [slotNumber] = params
+
+      parkingLotService.leave(+slotNumber)
+
       break
-    case CommandEnum.STATUS:
-      console.log('status')
+    }
+
+    case CommandEnum.STATUS: {
+      parkingLotService.displayStatus()
+
       break
-    case CommandEnum.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR:
-      console.log('registration_numbers_for_cars_with_colour')
+    }
+
+    case CommandEnum.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR: {
+      const [colour] = params
+
+      parkingLotService.displayRegistrationNumbersByColour(colour)
+
       break
-    case CommandEnum.SLOT_NUMBER_FOR_CARS_WITH_COLOUR:
-      console.log('slot_numbers_for_cars_with_colour')
+    }
+
+    case CommandEnum.SLOT_NUMBER_FOR_CARS_WITH_COLOUR: {
+      const [colour] = params
+
+      parkingLotService.displaySlotNumbersByColour(colour)
+
       break
-    case CommandEnum.SLOT_NUMBER_FOR_REGISTRATION_NUMBER:
-      console.log('slot_number_for_registration_number')
+    }
+
+    case CommandEnum.SLOT_NUMBER_FOR_REGISTRATION_NUMBER: {
+      const [registrationNumber] = params
+
+      parkingLotService.displaySlotNumberByRegistrationNumber(
+        +registrationNumber
+      )
+
       break
+    }
   }
 
   main()
