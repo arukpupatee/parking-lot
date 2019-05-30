@@ -1,16 +1,35 @@
 import { ParkingLot } from './models/ParkingLot'
+import { Car } from './models/Car'
+import { TicketManager } from './models/TicketManager'
 
 export class ParkingLotService {
   parkingLot: ParkingLot
+  ticketManager: TicketManager
+
+  constructor() {
+    this.parkingLot = new ParkingLot(0)
+    this.ticketManager = new TicketManager(this.parkingLot)
+  }
 
   createParkingLot(totalSlot: number) {
     this.parkingLot = new ParkingLot(totalSlot)
+    this.ticketManager = new TicketManager(this.parkingLot)
 
     console.log(`Created a parking lot with ${totalSlot} slots`)
   }
 
   park(registrationNumber: string, colour: string) {
-    console.log('Allocated slot number: 1')
+    const car = new Car(registrationNumber, colour)
+    const ticket = this.ticketManager.issueTicket({ ...car })
+
+    car.receiveTicket(ticket)
+
+    const slot = this.parkingLot.getSlotByNumber(ticket.slotNumber)
+    const parkedCar = car.park(slot)
+
+    this.parkingLot.updateParkedCar(slot, parkedCar)
+
+    console.log(`Allocated slot number: ${slot.number}`)
   }
 
   leave(slotNumber: number) {

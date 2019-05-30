@@ -1,70 +1,71 @@
 import { prompt } from 'readline-sync'
-import { ParkingLotService } from './ParkingLotService'
+import { ParkingLotService } from './parkingLot/ParkingLotService'
 
 function main() {
   const parkingLotService = new ParkingLotService()
-  const input = prompt()
-  const [command, ...params] = input.split(' ')
 
-  switch (command) {
-    case CommandEnum.CREATE_PARKING_LOT: {
-      const [totalSlot] = params
+  while (true) {
+    const input = prompt()
+    const [command, ...params] = input.split(' ')
 
-      parkingLotService.createParkingLot(+totalSlot)
+    switch (command) {
+      case CommandEnum.CREATE_PARKING_LOT: {
+        const [totalSlot] = params
 
-      break
-    }
+        parkingLotService.createParkingLot(+totalSlot)
 
-    case CommandEnum.PARK: {
-      const [registrationNumber, colour] = params
+        break
+      }
 
-      parkingLotService.park(registrationNumber, colour)
+      case CommandEnum.PARK: {
+        const [registrationNumber, colour] = params
 
-      break
-    }
+        parkingLotService.park(registrationNumber, colour)
 
-    case CommandEnum.LEAVE: {
-      const [slotNumber] = params
+        break
+      }
 
-      parkingLotService.leave(+slotNumber)
+      case CommandEnum.LEAVE: {
+        const [slotNumber] = params
 
-      break
-    }
+        parkingLotService.leave(+slotNumber)
 
-    case CommandEnum.STATUS: {
-      parkingLotService.displayStatus()
+        break
+      }
 
-      break
-    }
+      case CommandEnum.STATUS: {
+        parkingLotService.displayStatus()
 
-    case CommandEnum.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR: {
-      const [colour] = params
+        break
+      }
 
-      parkingLotService.displayRegistrationNumbersByColour(colour)
+      case CommandEnum.REGISTRATION_NUMBERS_FOR_CARS_WITH_COLOUR: {
+        const [colour] = params
 
-      break
-    }
+        parkingLotService.displayRegistrationNumbersByColour(colour)
 
-    case CommandEnum.SLOT_NUMBER_FOR_CARS_WITH_COLOUR: {
-      const [colour] = params
+        break
+      }
 
-      parkingLotService.displaySlotNumbersByColour(colour)
+      case CommandEnum.SLOT_NUMBER_FOR_CARS_WITH_COLOUR: {
+        const [colour] = params
 
-      break
-    }
+        parkingLotService.displaySlotNumbersByColour(colour)
 
-    case CommandEnum.SLOT_NUMBER_FOR_REGISTRATION_NUMBER: {
-      const [registrationNumber] = params
+        break
+      }
 
-      parkingLotService.displaySlotNumberByRegistrationNumber(
-        +registrationNumber
-      )
+      case CommandEnum.SLOT_NUMBER_FOR_REGISTRATION_NUMBER: {
+        const [registrationNumber] = params
 
-      break
+        parkingLotService.displaySlotNumberByRegistrationNumber(
+          +registrationNumber
+        )
+
+        break
+      }
     }
   }
-
-  main()
 }
 
 enum CommandEnum {
